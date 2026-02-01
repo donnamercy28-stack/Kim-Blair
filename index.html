@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Question for Kim 💕</title>
+
+  <style>
+    body {
+      background: #ffd6e7;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      font-family: Arial, sans-serif;
+      overflow: hidden; /* Prevents scrollbars if the button moves near the edge */
+    }
+
+    .card {
+      background: white;
+      padding: 30px;
+      border-radius: 20px;
+      text-align: center;
+      width: 90%;
+      max-width: 350px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+      position: relative;
+      min-height: 250px;
+    }
+
+    h2 {
+      margin-bottom: 40px;
+      color: #333;
+    }
+
+    .buttons {
+      position: relative;
+      height: 60px; /* Defined area for the buttons */
+    }
+
+    button {
+      padding: 12px 25px;
+      font-size: 16px;
+      border-radius: 25px;
+      border: none;
+      cursor: pointer;
+      position: absolute;
+      transition: 0.2s ease; /* Makes the "No" button movement look smoother */
+    }
+
+    #yes {
+      background: #ff4d88;
+      color: white;
+      left: 20%;
+    }
+
+    #no {
+      background: #ccc;
+      color: #333;
+      right: 20%;
+    }
+
+    .note {
+      margin-top: 50px;
+      font-size: 13px;
+      color: gray;
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <h2>Kim Blair…<br>do you love me? 💗</h2>
+
+    <div class="buttons">
+      <button id="yes" onclick="yesClicked()">Yes</button>
+      <button id="no" onmouseover="moveNo()" ontouchstart="moveNo()">No</button>
+    </div>
+
+    <div class="note">“No” is feeling a bit shy today... 😅</div>
+  </div>
+
+  <script>
+    function moveNo() {
+      const noBtn = document.getElementById("no");
+      
+      // We calculate movement based on the whole window 
+      // so the button can fly anywhere on the screen!
+      const padding = 50; 
+      const maxX = window.innerWidth - noBtn.clientWidth - padding;
+      const maxY = window.innerHeight - noBtn.clientHeight - padding;
+
+      // Random position
+      const randomX = Math.floor(Math.random() * maxX);
+      const randomY = Math.floor(Math.random() * maxY);
+
+      // Change position to fixed so it can escape the card
+      noBtn.style.position = "fixed";
+      noBtn.style.left = randomX + "px";
+      noBtn.style.top = randomY + "px";
+    }
+
+    function yesClicked() {
+      document.body.innerHTML = `
+        <div style="
+          display:flex;
+          flex-direction: column;
+          justify-content:center;
+          align-items:center;
+          height:100vh;
+          background:#ffd6e7;
+          font-family:Arial;
+          text-align:center;">
+          <h1 style="font-size: 3rem;">Hehe 😌💖</h1>
+          <h2 style="color: #ff4d88;">I knew it!</h2>
+        </div>
+      `;
+    }
+  </script>
+
+</body>
+</html>
