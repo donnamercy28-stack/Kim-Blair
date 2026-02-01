@@ -3,249 +3,418 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>THE PINK VAULT | The Ultimate Girly Bible</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Montserrat:wght@300;400;600&family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
+    <title>The Infinite Vault | 2026 Archive</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;1,700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --soft-pink: #fce4ec;
-            --barbie-pink: #ff85b5;
-            --luxury-gold: #d4af37;
-            --glass: rgba(255, 255, 255, 0.6);
-            --shadow: 0 8px 32px 0 rgba(255, 133, 181, 0.15);
+            --bg-color: #fcfaf8;
+            --accent-gold: #c5a059;
+            --text-main: #1a1a1a;
+            --text-soft: #555;
+            --glass-bg: rgba(255, 255, 255, 0.8);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
         body {
-            background: #fffafa;
-            background-image: radial-gradient(#ffe4e1 0.5px, transparent 0.5px);
-            background-size: 20px 20px;
-            font-family: 'Montserrat', sans-serif;
-            color: #444;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
             line-height: 1.6;
         }
 
-        /* --- SMOOTH SCROLLING --- */
-        html { scroll-behavior: smooth; }
+        header {
+            text-align: center;
+            padding: 60px 20px;
+            background: linear-gradient(to bottom, #fff, transparent);
+        }
 
-        /* --- NAVIGATION --- */
+        h1 {
+            font-family: 'Bodoni Moda', serif;
+            font-size: 3rem;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+
+        .nwt-verse {
+            font-style: italic;
+            color: var(--accent-gold);
+            margin-bottom: 40px;
+            font-size: 1.1rem;
+        }
+
+        /* Navigation Menu */
         nav {
-            position: fixed; width: 100%; top: 0; z-index: 1000;
-            background: var(--glass); backdrop-filter: blur(10px);
-            padding: 20px 40px; display: flex; justify-content: space-between;
-            border-bottom: 1px solid rgba(255, 192, 203, 0.3);
+            position: sticky;
+            top: 0;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #eee;
+            z-index: 1000;
+            padding: 15px 0;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
         }
 
-        .logo { font-family: 'Dancing Script', cursive; font-size: 2.2rem; color: var(--barbie-pink); }
-
-        .nav-links a {
-            text-decoration: none; color: #555; margin-left: 25px;
-            font-size: 0.75rem; font-weight: 600; letter-spacing: 2px;
-            text-transform: uppercase; transition: 0.3s;
+        nav button {
+            background: none;
+            border: none;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            color: var(--text-soft);
+            transition: 0.3s;
         }
 
-        .nav-links a:hover { color: var(--barbie-pink); transform: translateY(-2px); }
-
-        /* --- HERO SECTION --- */
-        .hero {
-            height: 100vh; display: flex; flex-direction: column;
-            justify-content: center; align-items: center; text-align: center;
-            background: url('https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=1920&q=80') center/cover;
-            position: relative;
+        nav button:hover {
+            color: var(--accent-gold);
         }
 
-        .hero::before {
-            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(255, 245, 245, 0.6);
+        /* Content Sections */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
         }
 
-        .hero-content { position: relative; z-index: 1; animation: fadeIn 2s ease; }
-
-        .hero h1 { 
-            font-family: 'Playfair Display', serif; font-size: 5rem; 
-            color: #333; margin-bottom: 10px; font-style: italic;
+        .vault-section {
+            display: none; /* Hidden until button clicked */
         }
 
-        /* --- THE GRID SECTIONS --- */
-        .section-title {
-            text-align: center; font-family: 'Playfair Display', serif;
-            font-size: 3rem; margin: 80px 0 40px; color: var(--barbie-pink);
+        .active {
+            display: block;
+            animation: fadeIn 0.8s ease;
         }
 
-        .main-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 30px; padding: 0 5%;
+        .item-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border-left: 4px solid var(--accent-gold);
         }
 
-        .category-card {
-            background: white; border-radius: 40px; padding: 40px;
-            box-shadow: var(--shadow); border: 1px solid rgba(255, 133, 181, 0.1);
-            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            position: relative; overflow: hidden;
+        .tutorial-btn {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 20px;
+            background: var(--text-main);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 0.9rem;
         }
 
-        .category-card:hover { transform: scale(1.05); border: 1px solid var(--barbie-pink); }
-
-        .category-card h3 { font-family: 'Playfair Display', serif; font-size: 1.8rem; margin-bottom: 20px; }
-
-        .item-tag {
-            display: inline-block; background: #fff0f5; color: #ff69b4;
-            padding: 5px 15px; border-radius: 20px; font-size: 0.7rem;
-            margin: 5px; font-weight: 700; cursor: pointer;
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
-
-        .item-tag:hover { background: var(--barbie-pink); color: white; }
-
-        /* --- MOOD BOARD --- */
-        .mood-board {
-            display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; padding: 5%;
-        }
-
-        .mood-img {
-            width: 100%; height: 250px; object-fit: cover; border-radius: 20px;
-            filter: grayscale(20%); transition: 0.5s;
-        }
-
-        .mood-img:hover { filter: grayscale(0%); transform: scale(1.03); }
-
-        /* --- THE GLOW-UP GUIDE (FOR BEGINNERS) --- */
-        .glow-up-section {
-            background: #ffebee; padding: 80px 10%; margin-top: 50px;
-            border-radius: 100px 100px 0 0; text-align: center;
-        }
-
-        .step-container {
-            display: flex; justify-content: space-around; flex-wrap: wrap; margin-top: 40px;
-        }
-
-        .step {
-            width: 250px; padding: 20px; background: white; border-radius: 25px;
-            margin-bottom: 20px; box-shadow: var(--shadow);
-        }
-
-        /* --- PINK FOODS & CAFE --- */
-        .food-grid { display: flex; overflow-x: scroll; gap: 20px; padding: 40px; }
-        .food-item {
-            min-width: 200px; text-align: center;
-        }
-        .food-item img { width: 150px; height: 150px; border-radius: 50%; border: 5px solid white; }
-
-        /* --- FOOTER --- */
-        footer {
-            background: #fff; padding: 60px; text-align: center;
-            border-top: 2px solid #fff0f5;
-        }
-
-        .bible-verse { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.2rem; color: #888; margin-top: 20px; }
-
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-
     </style>
 </head>
 <body>
 
-    <nav>
-        <div class="logo">the vault</div>
-        <div class="nav-links">
-            <a href="#beauty">Beauty</a>
-            <a href="#fashion">Fashion</a>
-            <a href="#glowup">Glow Up</a>
-            <a href="#lifestyle">Lifestyle</a>
-        </div>
-    </nav>
+<header>
+    <h1>THE INFINITE VAULT</h1>
+    <div class="nwt-verse">“Your word is a lamp to my foot, and a light to my path.” — Psalm 119:105 (NWT)</div>
+</header>
 
-    <section class="hero">
-        <div class="hero-content">
-            <h1>Soft, Sweet, Sacred.</h1>
-            <p>Your journey to becoming the best version of yourself starts here.</p>
-            <br>
-            <a href="#glowup" style="background: white; padding: 15px 40px; border-radius: 50px; text-decoration: none; color: var(--barbie-pink); font-weight: 700; box-shadow: var(--shadow);">Start Your Glow Up</a>
-        </div>
-    </section>
+<nav id="mainNav">
+    <button onclick="showSection('makeup')">Makeup & Skin</button>
+    <button onclick="showSection('shoes')">The Shoe Room</button>
+    <button onclick="showSection('fashion')">Closet & Merch</button>
+    <button onclick="showSection('culinary')">Café & Food</button>
+    <button onclick="showSection('lifestyle')">Home & Wellness</button>
+</nav>
 
-    <h2 class="section-title" id="beauty">The Beauty Bar</h2>
-    <div class="main-grid">
-        <div class="category-card">
-            <h3>Makeup Artistry</h3>
-            <p>Find your aesthetic signature.</p><br>
-            <div class="item-tag">Douyin Aesthetic</div> <div class="item-tag">Clean Girl</div> 
-            <div class="item-tag">Strawberry Girl</div> <div class="item-tag">Coquette Glam</div>
-            <div class="item-tag">Rhode Lip Combos</div> <div class="item-tag">E-Girl Wing</div>
+<div class="container" id="vaultContent">
+        <div id="makeup" class="vault-section active">
+        <h2 style="font-family: 'Bodoni Moda'; font-size: 2.5rem; text-align: center;">The Beauty Archive</h2>
+        
+        <div class="item-card">
+            <h3 style="color: var(--accent-gold);">01. The Skincare Bible (The Foundation)</h3>
+            <p><strong>The Protocol:</strong> Cleanse, Treat, Protect. We focus on "Glass Skin" clarity through barrier repair.</p>
+            <ul>
+                <li><strong>The Double Cleanse:</strong> An oil-based balm followed by a pH-balanced foam.</li>
+                <li><strong>The Morning Shield:</strong> Vitamin C + SPF 50 (Non-negotiable).</li>
+                <li><strong>The Night Reset:</strong> Retinoids and Ceramide-rich creams for cell turnover.</li>
+            </ul>
+            <a href="https://www.youtube.com/watch?v=l9asi_iBUOU" target="_blank" class="tutorial-btn">Watch Layering Tutorial (05:10)</a>
         </div>
-        <div class="category-card">
-            <h3>Hair Anatomy</h3>
-            <p>For every texture and curl.</p><br>
-            <div class="item-tag">4C Braid Patterns</div> <div class="item-tag">3B Silk Press</div> 
-            <div class="item-tag">Wig Install Hacks</div> <div class="item-tag">Butterfly Clips</div>
-            <div class="item-tag">Edges Control</div> <div class="item-tag">Heatless Curls</div>
+
+        <h3 style="margin-top: 40px; border-bottom: 1px solid var(--accent-gold);">The Master Kits (10+ Classifications)</h3>
+        
+        <div class="item-card">
+            <h4>1. The "Glass Skin" Base Kit</h4>
+            <p>Focuses on high-glow, translucent finishes. Includes: Chanel Les Beiges Water-Fresh Tint and Dior Forever Glow Star Filter.</p>
         </div>
-        <div class="category-card">
-            <h3>Nail Gallery</h3>
-            <p>The ultimate set inspiration.</p><br>
-            <div class="item-tag">3D Jelly Nails</div> <div class="item-tag">Chrome French</div> 
-            <div class="item-tag">Hello Kitty Charms</div> <div class="item-tag">Short Natural</div>
+
+        <div class="item-card">
+            <h4>2. The Lash & Brow Architecture</h4>
+            <p>Precision tools for a "Siren" look. Includes: Refy Brow Sculpt and Lancôme Lash Idôle Waterproof.</p>
+        </div>
+
+        <div class="item-card">
+            <h4>3. The Matte Velvet Evening Kit</h4>
+            <p>Full-glam coverage without the cake. Includes: Estée Lauder Double Wear + Huda Beauty Easy Bake Powder.</p>
+        </div>
+
+        <div class="item-card">
+            <h4>4. The "No-Makeup" Makeup Set</h4>
+            <p>Minimalist essentials: Glossier Boy Brow, Merit Flush Balm, and Saie Glowy Super Gel.</p>
+        </div>
+
+        <div class="item-card">
+            <h4>5. The Siren Eyes Palette</h4>
+            <p>Cool-toned browns, deep blacks, and sharp liquid liners from Pat McGrath Labs.</p>
+        </div>
+
+        <div class="item-card">
+            <h4>6. The Lip Wardrobe</h4>
+            <p>From "Black Honey" tints to the Dior Addict Lip Glow Oil and Fenty Icon Velvet Liquid Lip.</p>
+        </div>
+
+        <div class="item-card">
+            <h4>7. The Sun-Kissed Bronzing Kit</h4>
+            <p>Cream-based warmth: NARS Laguna Cream Bronzer and Drunk Elephant D-Bronzi Drops.</p>
+        </div>
+
+        <div class="item-card">
+            <h4>8. The High-Definition Concealing Set</h4>
+            <p>Correction and brightness: Tarte Shape Tape + NARS Radiant Creamy Concealer.</p>
+        </div>
+
+        <div class="item-card">
+            <h4>9. The Setting & Finishing Tools</h4>
+            <p>Locking the look: Charlotte Tilbury Airbrush Flawless Setting Spray and MAC Fix+.</p>
+        </div>
+
+        <div class="item-card">
+            <h4>10. The Editorial Blush Kit</h4>
+            <p>High-pigment liquids: Rare Beauty Soft Pinch Liquid Blush in 'Encourage' and 'Hope'.</p>
+        </div>
+
+        <div class="item-card">
+            <h4>11. The Tool Registry (Brushes & Blenders)</h4>
+            <p>The "Invisible" hand: BeautyBlender Pro, Hourglass Ambient Lighting Brush, and Sigma Eye sets.</p>
+        </div>
+        </div>
+        <div id="shoes" class="vault-section">
+        <h2 style="font-family: 'Bodoni Moda'; font-size: 2.5rem; text-align: center;">The Footwear & Garment Archive</h2>
+        
+        <div class="item-card">
+            <h3 style="color: var(--accent-gold);">The Engineering: Martini Glass Heels</h3>
+            <p><strong>The Profile:</strong> A flared base that mimics the stem of a martini glass. This design provides a wider surface area at the ground, offering superior stability compared to a traditional stiletto while maintaining a razor-sharp aesthetic.</p>
+            <p><em>Care:</em> Always check the heel tips (top-pieces) for wear. Replace them before the metal nail is exposed.</p>
+            <a href="https://www.youtube.com/watch?v=t9ct-gaykEo" target="_blank" class="tutorial-btn">Shoe Care & Mirror Shine Tutorial</a>
+        </div>
+
+        <h3 style="margin-top: 40px; border-bottom: 1px solid var(--accent-gold);">The Footwear Registry (10+ Examples)</h3>
+        
+        <div class="item-card">
+            <h4>1. The "Big Three" Sneakers</h4>
+            <p><strong>Nike Jordan 1s:</strong> High-top heritage. <strong>New Balance 550s:</strong> The dad-shoe aesthetic. <strong>Adidas Sambas:</strong> The slim, terrace-style staple.</p>
+        </div>
+
+        <div class="item-card">
+            <h4>2. High-Fashion Platforms</h4>
+            <p><strong>Versace Medusa Aevitas:</strong> Satin double-platforms. <strong>Vivienne Westwood:</strong> The iconic 'Elevated' Ghillie.</p>
+        </div>
+
+        <div class="item-card">
+            <h4>3. Streetwear "Grails"</h4>
+            <p><strong>BAPE Stas:</strong> Bold colors and star motifs. <strong>Off-White "Out of Office":</strong> The Virgil Abloh classic.</p>
+        </div>
+
+        <div class="item-card">
+            <h4>4. Casual Slides & Comfort</h4>
+            <p><strong>Yeezy Slides:</strong> Minimalist bone/resin tones. <strong>Birkenstock Bostons:</strong> The "Cottagecore" essential.</p>
+        </div>
+
+        <div class="item-card">
+            <h4>5. The Pointed Stiletto</h4>
+            <p><strong>Christian Louboutin So Kate:</strong> 120mm of pure pitch. <strong>Jimmy Choo Love:</strong> The comfortable luxury choice.</p>
+        </div>
+
+        <div class="item-card">
+            <h4>6. Square-Toe Boots</h4>
+            <p><strong>By Far:</strong> 90s inspired "Sofia" boots. <strong>Balenciaga:</strong> The "Knife" boot silhouette.</p>
+        </div>
+
+        <div class="item-card">
+            <h4>7. Chunky Loafers</h4>
+            <p><strong>Prada Monolith:</strong> The lug-sole king. <strong>Gucci Jordaan:</strong> The slim, timeless alternative.</p>
+        </div>
+
+        <div class="item-card">
+            <h4>8. Combat & Utility</h4>
+            <p><strong>Dr. Martens Jadon:</strong> Platform height. <strong>Bottega Veneta Lug:</strong> The puddle-proof luxury boot.</p>
+        </div>
+
+        <div class="item-card">
+            <h4>9. Ballet Flats (The 2026 Revival)</h4>
+            <p><strong>Miu Miu:</strong> Satin and buckled. <strong>Chanel:</strong> Two-tone lambskin classics.</p>
+        </div>
+
+        <div class="item-card">
+            <h4>10. Technical Performance</h4>
+            <p><strong>On Running Cloud:</strong> For the "Wellness" aesthetic. <strong>Asics Gel-Kayano:</strong> High-tech comfort.</p>
+        </div>
+
+        <h3 style="margin-top: 40px; border-bottom: 1px solid var(--accent-gold);">Closet Maintenance & Merch Logic</h3>
+        
+        <div class="item-card">
+            <h4>The Denim Protocol</h4>
+            <p><strong>To Wash or Freeze?</strong> We follow the 6-month rule. For raw denim, store in a sealed bag in the <strong>freezer</strong> for 48 hours to kill bacteria without fading the indigo. Only machine wash (inside out, cold) when structurally necessary.</p>
+        </div>
+        
+        <div class="item-card">
+            <h4>Artist Merch Strategy</h4>
+            <p>Focus on **Heavyweight Cotton (400GSM+)** and oversized fits. We categorize merch as "Elevated Loungewear," pairing band tees with blazers for the "High-Low" aesthetic.</p>
+        </div>
+        </div>
+        <div id="culinary" class="vault-section">
+        <h2 style="font-family: 'Bodoni Moda'; font-size: 2.5rem; text-align: center;">The Culinary Floor</h2>
+        
+        <h3 style="color: var(--accent-gold); border-bottom: 1px solid var(--accent-gold);">01. The Pinterest Breakfast (10+ Blueprints)</h3>
+        <div class="item-card">
+            <p>High-nutrition, "Glass Skin" fuel designed for aesthetics and energy.</p>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px;">
+                <div>• <strong>Overnight Chia Pudding:</strong> Layered with mango purée.</div>
+                <div>• <strong>Açaí Power Bowls:</strong> With "ribboned" peanut butter.</div>
+                <div>• <strong>Everything Avocado Toast:</strong> Sliced with chili oil.</div>
+                <div>• <strong>Soft-Scrambled "Pillow" Eggs:</strong> On brioche.</div>
+                <div>• <strong>Savory Quinoa Bowls:</strong> With 6-minute boiled eggs.</div>
+                <div>• <strong>Coconut Milk Porridge:</strong> With caramelized bananas.</div>
+                <div>• <strong>Greek Yogurt Bark:</strong> Frozen with berries and honey.</div>
+                <div>• <strong>Matcha Overnight Oats:</strong> With white chocolate chips.</div>
+                <div>• <strong>Turkish Eggs (Cilbir):</strong> Garlicky yogurt base.</div>
+                <div>• <strong>Cloud Eggs:</strong> Whipped whites with set yolks.</div>
+            </div>
+            <a href="https://www.youtube.com/watch?v=mtxH06LWXnM" target="_blank" class="tutorial-btn">Watch Aesthetic Breakfast Prep</a>
+        </div>
+
+        <h3 style="margin-top: 40px; color: var(--accent-gold); border-bottom: 1px solid var(--accent-gold);">02. Global Street Food & Trends</h3>
+        <div class="item-card">
+            <h4>Viral Tanghulu (Glass Fruit)</h4>
+            <p>The 2:1 sugar-to-water ratio creates a crystal shell that crunches like glass. <em>Key Tip:</em> Use an ice bath immediately after dipping.</p>
+            <a href="https://www.youtube.com/shorts/6pWP7YlnADg" target="_blank" class="tutorial-btn">Watch Tanghulu "Crunch" Tutorial</a>
+        </div>
+
+        <div class="item-card">
+            <h4>Korean Corn Dogs & Rose Tteokbokki</h4>
+            <p>The "Rose" version of rice cakes uses cream and gochujang for a smoother, aesthetic orange hue. Best paired with mozzarella-filled corn dogs.</p>
+        </div>
+
+        <h3 style="margin-top: 40px; color: var(--accent-gold); border-bottom: 1px solid var(--accent-gold);">03. The Drink Archive (Liquid Aesthetic)</h3>
+        <div class="item-card">
+            <h4>Iced Strawberry Matcha Latte</h4>
+            <p><strong>The 3-Layer Technique:</strong> Macerated strawberry base, heavy milk middle, and frothy ceremonial matcha top. <em>Pro Tip:</em> Pour over a spoon to keep the layers crisp.</p>
+            <a href="https://www.youtube.com/watch?v=JUSKok1337I" target="_blank" class="tutorial-btn">Watch Layering Technique (01:45)</a>
+        </div>
+
+        <div class="item-card">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px;">
+                <div>• <strong>Hojicha Latte:</strong> Roasted nutty flavor.</div>
+                <div>• <strong>Blue Pea Tea:</strong> Color-changing purple tea.</div>
+                <div>• <strong>Cloud Coffee:</strong> Cold brew with salted foam.</div>
+                <div>• <strong>Ube Latte:</strong> Vibrant purple yam milk.</div>
+            </div>
+        </div>
+        </div>
+        <div id="lifestyle" class="vault-section">
+        <h2 style="font-family: 'Bodoni Moda'; font-size: 2.5rem; text-align: center;">The Sanctuary & Wellness Wing</h2>
+        
+        <h3 style="color: var(--accent-gold); border-bottom: 1px solid var(--accent-gold);">01. The Interior Archive (10+ Aesthetics)</h3>
+        <div class="item-card" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+            <div><strong>• Cloud Nine:</strong> Dreamcore ethereal.</div>
+            <div><strong>• Afrohemian:</strong> Earthy heritage.</div>
+            <div><strong>• Japandi:</strong> Scandi-Japanese mix.</div>
+            <div><strong>• Extra-Celestial:</strong> Cosmic/Opal.</div>
+            <div><strong>• Biophilic:</strong> Plant-heavy nature.</div>
+            <div><strong>• Neo-Deco:</strong> 2026 Sleek Chrome.</div>
+            <div><strong>• Cozy Tech:</strong> Integrated smart home.</div>
+            <div><strong>• 70s Nostalgia:</strong> Warm retro tones.</div>
+            <div><strong>• Heritage:</strong> English Grandeur.</div>
+            <div><strong>• FunHaus:</strong> Playful Maximalism.</div>
+        </div>
+
+        <h3 style="margin-top: 40px; color: var(--accent-gold); border-bottom: 1px solid var(--accent-gold);">02. The Wellness Bible (Physical & Mental)</h3>
+        <div class="item-card">
+            <h4>The Gym Pillars (Top 5)</h4>
+            <p>1. <strong>Reformer Pilates:</strong> Core & Posture. 2. <strong>Zone 2 Cardio:</strong> Heart Health. 3. <strong>Somatic Movement:</strong> Trauma Release. 4. <strong>Strength Training:</strong> Compound Lifts. 5. <strong>Vinyasa Flow:</strong> Flexibility.</p>
+        </div>
+
+        <div class="item-card">
+            <h4>Self-Care Sunday (The 10-Step Reset)</h4>
+            <p>Digital Detox, Magnesium Soak, The "Everything" Shower, Circadian Lighting, Somatic Journaling, Meal Prep, Forest Bathing, Scent Scaping, Gua Sha, and Intentions Setting.</p>
+            <a href="https://www.youtube.com/watch?v=mtxH06LWXnM" target="_blank" class="tutorial-btn">Watch Morning Wellness Routine</a>
+        </div>
+
+        <h3 style="margin-top: 40px; color: var(--accent-gold); border-bottom: 1px solid var(--accent-gold);">03. The Digital Vault (Productivity & Phone)</h3>
+        <div class="item-card">
+            <h4>The "Clean Girl" Phone Aesthetic</h4>
+            <p>Greyscale toggles, Minimalist Widget Stacks, and "One-Page" App Folders. Use custom "Quiet Luxury" icons in beige or black to reduce digital dopamine spikes.</p>
+            <a href="https://www.youtube.com/watch?v=f-S6Y6VvW9A" target="_blank" class="tutorial-btn">Watch Minimalist Phone Setup (02:15)</a>
+        </div>
+
+        <div class="item-card">
+            <h4>The Professor's Deep Work Tools</h4>
+            <ul>
+                <li><strong>Notion/Obsidian:</strong> The "Second Brain" for storage.</li>
+                <li><strong>90-Minute Flow:</strong> Ultradian rhythm focus sessions.</li>
+                <li><strong>Binaural Beats:</strong> Alpha-wave frequency for study.</li>
+            </ul>
         </div>
     </div>
-
-    <h2 class="section-title">The Mood Board</h2>
-    <div class="mood-board">
-        <img src="https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=500" class="mood-img" alt="Aesthetic">
-        <img src="https://images.unsplash.com/photo-1512496015851-a90fb38ba796?q=80&w=500" class="mood-img" alt="Makeup">
-        <img src="https://images.unsplash.com/photo-1526045612212-70caf35c14df?q=80&w=500" class="mood-img" alt="Flowers">
-        <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=500" class="mood-img" alt="Fashion">
     </div>
+        <script>
+        /**
+         * The showSection function handles the "Switching" logic.
+         * It hides all sections and only displays the one clicked.
+         */
+        function showSection(sectionId) {
+            // 1. Select all sections with the class 'vault-section'
+            const sections = document.querySelectorAll('.vault-section');
+            
+            // 2. Hide every section by removing the 'active' class
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
 
-    <section class="glow-up-section" id="glowup">
-        <h2 class="section-title">Beginner's Glow-Up Guide</h2>
-        <div class="step-container">
-            <div class="step">
-                <h4>01. Mindset</h4>
-                <p>Start your day with gratitude and a prayer.</p>
-            </div>
-            <div class="step">
-                <h4>02. Hydration</h4>
-                <p>2 Liters of water with lemon slices. Glowing skin starts inside.</p>
-            </div>
-            <div class="step">
-                <h4>03. Signature Scent</h4>
-                <p>Layer your vanilla lotion with a floral perfume.</p>
-            </div>
-            <div class="step">
-                <h4>04. Movement</h4>
-                <p>15 mins of Pilates or a "Hot Girl Walk."</p>
-            </div>
-        </div>
-    </section>
+            // 3. Show the specific section that was clicked
+            const activeSection = document.getElementById(sectionId);
+            if (activeSection) {
+                activeSection.classList.add('active');
+                
+                // 4. Smooth scroll to the top of the content area
+                window.scrollTo({
+                    top: document.getElementById('mainNav').offsetTop - 20,
+                    behavior: 'smooth'
+                });
+            }
+        }
 
-    <h2 class="section-title">The Pink Cafe</h2>
-    <div class="food-grid">
-        <div class="food-item">
-            <img src="https://images.unsplash.com/photo-1513267048331-5611cad82e4f?q=80&w=300" alt="Latte">
-            <p>Pink Matcha Latte</p>
-        </div>
-        <div class="food-item">
-            <img src="https://images.unsplash.com/photo-1519915028121-7d3463d20b13?q=80&w=300" alt="Macarons">
-            <p>Rose Macarons</p>
-        </div>
-        <div class="food-item">
-            <img src="https://images.unsplash.com/photo-1516738901171-8eb4fc13bd20?q=80&w=300" alt="Fruit">
-            <p>Pitaya Smoothie Bowls</p>
-        </div>
-        <div class="food-item">
-            <img src="https://images.unsplash.com/photo-1576618148400-f54bed99fcfd?q=80&w=300" alt="Toast">
-            <p>Strawberry Cream Toast</p>
-        </div>
-    </div>
+        // Set default view on load (Ensure Makeup is visible first)
+        window.onload = function() {
+            showSection('makeup');
+        };
+    </script>
 
-    <footer>
-        <div class="logo">the pink vault.</div>
-        <p>&copy; 2026 Crafted for the Divine Girl.</p>
-        <div class="bible-verse">
-            "I praise you because in an awe-inspiring way I am wonderfully made." <br>
-            — Psalm 139:14 (NWT)
-        </div>
+    <footer style="text-align: center; padding: 100px 20px 40px; color: var(--text-soft); font-size: 0.8rem; letter-spacing: 1px;">
+        <p>&copy; 2026 THE INFINITE VAULT | POWERED BY THE PROFESSOR</p>
+        <p><em>Curated for excellence. Dedicated to the vision.</em></p>
     </footer>
 
 </body>
-                                                           </html>
+</html>
+
+    
+    
+    
+    
     
