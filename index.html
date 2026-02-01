@@ -1,124 +1,196 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Question for Kim 💕</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arsenal Command Center | Kim Blair</title>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <style>
+        :root {
+            --arsenal-red: #DB0007;
+            --arsenal-gold: #9C824A;
+            --dark-bg: #0f0f0f;
+            --neon-glow: 0 0 10px rgba(219, 0, 7, 0.7);
+        }
 
-  <style>
-    body {
-      background: #ffd6e7;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-      font-family: Arial, sans-serif;
-      overflow: hidden; /* Prevents scrollbars if the button moves near the edge */
-    }
+        body, html {
+            margin: 0; padding: 0;
+            background: var(--dark-bg);
+            color: white;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
 
-    .card {
-      background: white;
-      padding: 30px;
-      border-radius: 20px;
-      text-align: center;
-      width: 90%;
-      max-width: 350px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-      position: relative;
-      min-height: 250px;
-    }
+        #password-screen {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: black; z-index: 1000;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+        }
 
-    h2 {
-      margin-bottom: 40px;
-      color: #333;
-    }
+        .terminal-text {
+            color: var(--arsenal-red);
+            font-family: monospace;
+            margin-bottom: 20px;
+            text-shadow: var(--neon-glow);
+        }
 
-    .buttons {
-      position: relative;
-      height: 60px; /* Defined area for the buttons */
-    }
+        input {
+            background: transparent; border: 2px solid var(--arsenal-red);
+            color: white; padding: 10px; text-align: center; font-size: 1.2rem;
+            border-radius: 5px; outline: none; box-shadow: var(--neon-glow);
+        }
 
-    button {
-      padding: 12px 25px;
-      font-size: 16px;
-      border-radius: 25px;
-      border: none;
-      cursor: pointer;
-      position: absolute;
-      transition: 0.2s ease; /* Makes the "No" button movement look smoother */
-    }
+        #mini-me {
+            position: fixed; bottom: 20px; right: 20px; z-index: 100;
+            width: 80px; height: 80px; background: var(--arsenal-red);
+            border-radius: 50%; border: 3px solid var(--arsenal-gold);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 40px; box-shadow: var(--neon-glow);
+        }
 
-    #yes {
-      background: #ff4d88;
-      color: white;
-      left: 20%;
-    }
+        #speech-bubble {
+            position: fixed; bottom: 110px; right: 20px;
+            background: white; color: black; padding: 15px;
+            border-radius: 15px; width: 220px; font-weight: bold;
+            display: none; z-index: 101; border: 2px solid var(--arsenal-red);
+        }
 
-    #no {
-      background: #ccc;
-      color: #333;
-      right: 20%;
-    }
+        .section {
+            min-height: 100vh; display: flex; flex-direction: column;
+            align-items: center; justify-content: center; padding: 20px;
+            text-align: center;
+        }
 
-    .note {
-      margin-top: 50px;
-      font-size: 13px;
-      color: gray;
-      font-style: italic;
-    }
-  </style>
+        .stats-card {
+            background: #1a1a1a; border: 2px solid var(--arsenal-gold);
+            padding: 30px; border-radius: 15px; width: 300px;
+            box-shadow: var(--neon-glow);
+        }
+
+        .reason-box {
+            background: rgba(219, 0, 7, 0.1); border-left: 5px solid var(--arsenal-red);
+            margin: 10px; padding: 20px; width: 80%; max-width: 600px;
+        }
+
+        .btn-container { position: relative; height: 100px; width: 300px; margin-top: 20px; }
+
+        #yesBtn {
+            background: #28a745; color: white; border: none;
+            padding: 15px 40px; font-size: 1.5rem; border-radius: 10px;
+            cursor: pointer;
+        }
+
+        #noBtn {
+            position: absolute; background: var(--arsenal-red);
+            color: white; border: none; padding: 10px 30px;
+            font-size: 1.2rem; border-radius: 10px; cursor: not-allowed;
+        }
+
+        #success-screen {
+            display: none; position: fixed; top: 0; left: 0; width: 100%;
+            height: 100%; background: rgba(0,0,0,0.9); z-index: 200;
+            flex-direction: column; align-items: center; justify-content: center;
+        }
+    </style>
 </head>
 <body>
 
-  <div class="card">
-    <h2>Kim Blair…<br>do you love me? 💗</h2>
-
-    <div class="buttons">
-      <button id="yes" onclick="yesClicked()">Yes</button>
-      <button id="no" onmouseover="moveNo()" ontouchstart="moveNo()">No</button>
+    <div id="password-screen">
+        <div class="terminal-text" id="term-text">AUTHENTICATION REQUIRED: KIM_BLAIR_UNIT</div>
+        <input type="text" id="passInput" placeholder="DD/MM/YYYY">
+        <button onclick="checkPass()" style="margin-top:15px; background:var(--arsenal-red); color:white; border:none; padding:10px 20px; cursor:pointer; border-radius:5px;">ENTER</button>
+        <p id="hint-text" style="font-size: 0.8rem; margin-top: 10px; color: #555;">Hint: Your favorite girl's birthday!</p>
     </div>
 
-    <div class="note">“No” is feeling a bit shy today... 😅</div>
-  </div>
+    <div id="mini-me">👧</div>
+    <div id="speech-bubble"></div>
 
-  <script>
-    function moveNo() {
-      const noBtn = document.getElementById("no");
-      
-      // We calculate movement based on the whole window 
-      // so the button can fly anywhere on the screen!
-      const padding = 50; 
-      const maxX = window.innerWidth - noBtn.clientWidth - padding;
-      const maxY = window.innerHeight - noBtn.clientHeight - padding;
+    <div id="main-content" style="display:none;">
+        <section class="section">
+            <h1 id="celebration-header" style="color: var(--arsenal-gold); font-size: 2rem; margin-bottom:20px;"></h1>
+            <h1 style="color: var(--arsenal-red); font-size: 3.5rem;">WELCOME, KIM.</h1>
+            <div class="stats-card">
+                <h3>PLAYER STATS</h3>
+                <p>LOYALTY: 100%</p>
+                <p>TEAM: Arsenal FC ⚽</p>
+                <p>KDRAMA COMPLIANCE: 0% ❌</p>
+            </div>
+            <p style="margin-top: 20px;">Scroll down for your briefing...</p>
+        </section>
 
-      // Random position
-      const randomX = Math.floor(Math.random() * maxX);
-      const randomY = Math.floor(Math.random() * maxY);
+        <section class="section">
+            <h2 style="color: var(--arsenal-gold);">WEAK HERO CLASS 1: SYLLABUS</h2>
+            <div class="reason-box"><strong>Module 01: Tactical Genius.</strong> The main lead is a genius like Arteta. You'll love the strategy.</div>
+            <div class="reason-box"><strong>Module 02: Short Season.</strong> It's only 8 episodes. No excuses for a busy Arsenal fan!</div>
+            <div class="reason-box"><strong>Module 03: Professional Action.</strong> The choreography is top-tier, just like a smooth Arsenal counter-attack.</div>
+            <div class="reason-box"><strong>Module 04: The Red Card.</strong> Failure to watch results in an official match ban. 🟥</div>
+        </section>
 
-      // Change position to fixed so it can escape the card
-      noBtn.style.position = "fixed";
-      noBtn.style.left = randomX + "px";
-      noBtn.style.top = randomY + "px";
-    }
+        <section class="section">
+            <h2>FINAL AUTHORIZATION</h2>
+            <p>Do you agree to all terms and conditions (including the K-drama)?</p>
+            <div class="btn-container">
+                <button id="yesBtn" onclick="finalWin()">YES</button>
+                <button id="noBtn" onmouseover="moveNo()">NO</button>
+            </div>
+        </section>
+    </div>
 
-    function yesClicked() {
-      document.body.innerHTML = `
-        <div style="
-          display:flex;
-          flex-direction: column;
-          justify-content:center;
-          align-items:center;
-          height:100vh;
-          background:#ffd6e7;
-          font-family:Arial;
-          text-align:center;">
-          <h1 style="font-size: 3rem;">Hehe 😌💖</h1>
-          <h2 style="color: #ff4d88;">I knew it!</h2>
-        </div>
-      `;
-    }
-  </script>
+    <div id="success-screen">
+        <h1 style="color: var(--arsenal-gold);">ACCESS GRANTED! 🎉</h1>
+        <p style="font-size: 1.5rem; text-align: center;">Mission Accomplished! <br><br><strong>Watch Weak Hero Class 1, Grandpa! 😒💖⚽</strong></p>
+    </div>
 
+    <script>
+        const pass = "20/02/2004"; 
+        let attempts = 0;
+        const bubble = document.getElementById('speech-bubble');
+
+        function showBubble(text, time) {
+            bubble.innerText = text;
+            bubble.style.display = 'block';
+            setTimeout(() => { bubble.style.display = 'none'; }, time);
+        }
+
+        function checkPass() {
+            const input = document.getElementById('passInput').value;
+            if (input === pass) {
+                document.getElementById('password-screen').style.display = 'none';
+                document.getElementById('main-content').style.display = 'block';
+                document.getElementById('celebration-header').innerText = "He shoots, He scores!!! And the Gunners strike again, what a moment in football history! ⚽🔥";
+                confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
+                showBubble("GOAAAAALLLLL! ⚽🥳", 4000);
+            } else {
+                attempts++;
+                if (attempts === 1) {
+                    showBubble("Wait... so you don't remember my birthday? 🤨", 3000);
+                } else {
+                    showBubble("So basically you hate me... 🤕", 4000);
+                }
+            }
+        }
+
+        function moveNo() {
+            const noBtn = document.getElementById('noBtn');
+            const x = Math.random() * (window.innerWidth - 100);
+            const y = Math.random() * (window.innerHeight - 100);
+            noBtn.style.left = x + 'px';
+            noBtn.style.top = y + 'px';
+            showBubble("Offside! Nice try! 😂", 1000);
+        }
+
+        function finalWin() {
+            confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 }, colors: ['#DB0007', '#9C824A'] });
+            document.getElementById('success-screen').style.display = 'flex';
+        }
+
+        window.onscroll = function() {
+            let top = window.scrollY;
+            if (top > 500 && top < 1000) { showBubble("Pay attention to the syllabus! 📖", 2000); }
+            if (top > 1200) { showBubble("Don't even try to hit 'No'...", 2000); }
+        };
+    </script>
 </body>
-</html>
+          </html>
+      
