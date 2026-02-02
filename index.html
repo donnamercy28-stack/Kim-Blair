@@ -1,186 +1,192 @@
+/* --- THE MUSE: SEO YEAJI GLOBAL STYLES --- */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Poppins:wght@200;300;400;600&display=swap');
+
+:root {
+    --primary-pink: #fce4ec;
+    --deep-rose: #d81b60;
+    --soft-cream: #fffdfb;
+    --accent-gold: #d4af37;
+    --glass-white: rgba(255, 255, 255, 0.8);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    background-color: var(--soft-cream);
+    font-family: 'Poppins', sans-serif;
+    color: #444;
+    overflow-x: hidden;
+}
+
+/* --- FLOATING HEARTS ANIMATION --- */
+.heart-particle {
+    position: fixed;
+    top: -10%;
+    color: var(--deep-rose);
+    font-size: 1.5rem;
+    user-select: none;
+    pointer-events: none;
+    animation: fall linear infinite;
+    z-index: 9999;
+    opacity: 0.6;
+}
+
+@keyframes fall {
+    to { transform: translateY(110vh) rotate(360deg); }
+}
+
+/* --- NAVIGATION BAR --- */
+nav {
+    background: var(--glass-white);
+    backdrop-filter: blur(10px);
+    padding: 20px 10%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 1px solid var(--primary-pink);
+}
+
+nav .logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: var(--deep-rose);
+}
+
+nav ul { display: flex; list-style: none; }
+nav ul li { margin-left: 30px; }
+nav ul li a {
+    text-decoration: none;
+    color: #555;
+    font-weight: 600;
+    transition: 0.3s;
+    text-transform: uppercase;
+}
+
+nav ul li a:hover { color: var(--deep-rose); }
+
+/* --- HERO SECTION --- */
+.hero {
+    height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: linear-gradient(rgba(255,255,255,0.4), rgba(255,255,255,0.4)), url('images/hero-bg.jpg');
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.hero-content h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 5rem;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* --- LOVE GIF STYLES --- */
+.gif-container {
+    padding: 50px 10%;
+    text-align: center;
+}
+
+.love-gif {
+    border-radius: 50%;
+    border: 5px solid white;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    margin: 20px;
+    transition: 0.5s;
+}
+
+.love-gif:hover { transform: scale(1.1) rotate(5deg); }
+
+/* --- TABLE STYLES (THE CAREER) --- */
+.career-table {
+    width: 80%;
+    margin: 50px auto;
+    border-collapse: collapse;
+    background: white;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+.career-table th {
+    background: var(--primary-pink);
+    color: var(--deep-rose);
+    padding: 15px;
+    text-align: left;
+}
+
+.career-table td {
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+}
+
+/* --- FOOTER --- */
+footer {
+    background: #333;
+    color: white;
+    text-align: center;
+    padding: 40px;
+    margin-top: 100px;
+}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Aura | Mobile Experience</title>
-    <style>
-        :root {
-            --bg: #050505;
-            --glass: rgba(255, 255, 255, 0.03);
-            --border: rgba(255, 255, 255, 0.1);
-            --accent: #ffb3c1;
-            --text: #ffffff;
-            --gold: #d4af37;
-        }
-
-        * {
-            box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        body {
-            margin: 0;
-            background-color: var(--bg);
-            background-image: radial-gradient(circle at 50% 50%, #1a1a1a 0%, #050505 100%);
-            color: var(--text);
-            font-family: 'Bodoni Moda', serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            overflow-x: hidden;
-            padding-bottom: 100px;
-        }
-
-        /* Header Vibe */
-        header {
-            height: 40vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-        }
-
-        .logo {
-            font-size: 2.5rem;
-            letter-spacing: 12px;
-            text-transform: uppercase;
-            margin: 0;
-            background: linear-gradient(to bottom, #fff, #666);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        /* The Stack */
-        .container {
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            gap: 60px;
-            align-items: center;
-        }
-
-        .card {
-            width: 85vw;
-            height: 450px;
-            background: var(--glass);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid var(--border);
-            border-radius: 30px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            padding: 40px;
-            transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
-            position: relative;
-            transform: scale(0.9);
-            opacity: 0.5;
-        }
-
-        /* The "Active" state when card is in view */
-        .card.active {
-            transform: scale(1);
-            opacity: 1;
-            border: 1px solid var(--accent);
-            box-shadow: 0 0 40px rgba(255, 179, 193, 0.15);
-        }
-
-        .card-category {
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 4px;
-            color: var(--accent);
-        }
-
-        .card-title {
-            font-size: 2.2rem;
-            margin: 10px 0;
-            font-weight: 300;
-        }
-
-        .card-quote {
-            font-size: 0.9rem;
-            line-height: 1.6;
-            font-style: italic;
-            opacity: 0.8;
-            margin-top: auto;
-        }
-
-        /* Floating Glow Decorations */
-        .glow-orb {
-            position: fixed;
-            width: 300px;
-            height: 300px;
-            background: radial-gradient(circle, rgba(255,179,193,0.1) 0%, transparent 70%);
-            z-index: -1;
-            border-radius: 50%;
-            top: 20%; left: -10%;
-        }
-    </style>
+    <title>The Muse: SEO YEAJI | Home</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div class="glow-orb"></div>
+    <script>
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart-particle');
+            heart.innerHTML = '❤';
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.animationDuration = Math.random() * 2 + 3 + "s";
+            document.body.appendChild(heart);
+            setTimeout(() => { heart.remove(); }, 5000);
+        }
+        setInterval(createHeart, 300);
+    </script>
 
-    <header>
-        <h1 class="logo">VAULT</h1>
-        <p style="opacity: 0.4; font-size: 0.7rem; letter-spacing: 3px;">INTELLIGENT AESTHETIC</p>
+    <nav>
+        <div class="logo">The Muse</div>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="profile.html">Profile</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+        </ul>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-content">
+            <h1>SEO YEAJI</h1>
+            <p>Actress • Fashion Muse • Our Beloved</p>
+        </div>
     </header>
 
-    <div class="container">
-        <div class="card">
-            <div class="card-category">Spirit</div>
-            <h2 class="card-title">Faith</h2>
-            <p class="card-quote">"Your word is a lamp to my foot, and a light for my path." <br>— Psalm 119:105 (NWT)</p>
+    <section class="gif-container">
+        <h2>From Yeaji, With Love <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJmcHNoZWJ3Z3B6Z3B6Z3B6Z3B6Z3B6Z3B6Z3B6Z3B6JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1z/L20mbc7yBGdq36dZ6z/giphy.gif" width="40"></h2>
+        <div class="gif-grid">
+            <img class="love-gif" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHJmcHNoZWJ3Z3B6Z3B6Z3B6Z3B6Z3B6Z3B6Z3B6Z3B6JmVwPXYxX2ludGVybmFsX2dpZl9ieV9iZCZjdD1z/Zvg6mO3g1f6Z2YV/giphy.gif" alt="Yeaji Love">
+            <img class="love-gif" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHJmcHNoZWJ3Z3B6Z3B6Z3B6Z3B6Z3B6Z3B6Z3B6Z3B6JmVwPXYxX2ludGVybmFsX2dpZl9ieV9iZCZjdD1z/3o7TKoHNJTWWLglqcM/giphy.gif" alt="Finger Heart">
         </div>
+    </section>
 
-        <div class="card">
-            <div class="card-category">Visual</div>
-            <h2 class="card-title">Style</h2>
-            <p class="card-quote">A curated collection of pieces that speak without words. The blueprint of personal identity.</p>
-        </div>
+    <section class="facts-section">
+        <div class="text-content" style="padding: 0 15%;">
+            <h3>The New Era: Sublime & Nick Nicole</h3>
+            <p>Seo Yeaji has entered a radiant new chapter. After joining <strong>Sublime Artist Agency</strong>, she has blossomed as the official ambassador for <strong>Nick Nicole</strong>...</p>
+            </div>
+    </section>
 
-        <div class="card">
-            <div class="card-category">Alchemy</div>
-            <h2 class="card-title">Glow</h2>
-            <p class="card-quote">Beauty meets chemistry. The science of radiance and the ritual of self-care.</p>
-        </div>
-    </div>
-
-    <script>
-        // Intersection Observer Logic: "Wakes up" cards as you scroll
-        const observerOptions = {
-            threshold: 0.6 // Card must be 60% visible to "activate"
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                } else {
-                    entry.target.classList.remove('active');
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.card').forEach(card => {
-            observer.observe(card);
-        });
-
-        // Touch Feedback Logic
-        document.querySelectorAll('.card').forEach(card => {
-            card.addEventListener('touchstart', () => {
-                card.style.transform = "scale(0.98)";
-                card.style.backgroundColor = "rgba(255, 255, 255, 0.07)";
-            });
-            card.addEventListener('touchend', () => {
-                card.style.transform = "scale(1)";
-                card.style.backgroundColor = "var(--glass)";
-            });
-        });
-    </script>
+    <footer>
+        <p>&copy; 2026 The Muse: SEO YEAJI | Created for Yeyeji with 💖</p>
+    </footer>
 </body>
-          </html>
-
+</html>
