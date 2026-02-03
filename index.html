@@ -3,190 +3,213 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Message for Wilfred Jaduong'</title>
+    <title>A Message for Wilfred Jaduong'</title>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;500&display=swap" rel="stylesheet">
     <style>
         :root {
-            --pink: #ffb3c1;
-            --dark-pink: #fb6f92;
-            --soft-white: #fff5f7;
+            --pink-glow: #ffccd5;
+            --main-pink: #fb6f92;
+            --glass: rgba(255, 255, 255, 0.4);
         }
 
         body {
             margin: 0;
-            padding: 0;
+            min-height: 100vh;
             display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
-            min-height: 100vh;
-            background-color: var(--soft-white);
-            font-family: 'Bodoni Moda', serif;
-            text-align: center;
-            overflow: hidden;
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, #fff5f7 0%, #ffccd5 100%);
+            overflow-x: hidden;
+            position: relative;
         }
 
-        .container {
+        /* Floating background elements for "Special" feel */
+        .floating-heart {
+            position: absolute;
+            font-size: 2rem;
+            opacity: 0.2;
+            animation: float 10s infinite linear;
+            z-index: 0;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) rotate(0deg); }
+            100% { transform: translateY(-20vh) rotate(360deg); }
+        }
+
+        .glass-container {
             width: 90%;
-            max-width: 400px;
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(10px);
-            padding: 30px;
-            border-radius: 30px;
-            border: 2px solid var(--pink);
-            box-shadow: 0 10px 30px rgba(255, 179, 193, 0.3);
+            max-width: 380px;
+            background: var(--glass);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-radius: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            padding: 40px 25px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+            z-index: 10;
+            transition: all 0.5s ease;
         }
 
-        .nail-img {
+        .nail-frame {
             width: 100%;
-            border-radius: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            height: 200px;
+            border-radius: 25px;
+            overflow: hidden;
+            margin-bottom: 25px;
+            box-shadow: 0 8px 20px rgba(251, 111, 146, 0.2);
+        }
+
+        .nail-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         h1 {
-            font-size: 1.5rem;
-            color: var(--dark-pink);
-            margin-bottom: 10px;
+            font-family: 'Bodoni Moda', serif;
+            color: var(--main-pink);
+            font-size: 1.8rem;
+            margin-bottom: 15px;
         }
 
         p {
-            font-size: 1rem;
+            font-size: 0.95rem;
             color: #555;
-            line-height: 1.5;
+            line-height: 1.6;
+            margin-bottom: 25px;
         }
 
-        .btn-container {
+        .btn-stack {
             display: flex;
             flex-direction: column;
-            align-items: center;
             gap: 15px;
-            margin-top: 20px;
+            align-items: center;
         }
 
         #yesBtn {
-            background-color: var(--dark-pink);
+            background: var(--main-pink);
             color: white;
             border: none;
-            padding: 15px 30px;
+            padding: 16px 40px;
             border-radius: 50px;
-            font-size: 1.2rem;
+            font-weight: 600;
+            font-size: 1.1rem;
             cursor: pointer;
-            transition: transform 0.3s ease;
-            box-shadow: 0 5px 15px rgba(251, 111, 146, 0.4);
+            box-shadow: 0 10px 20px rgba(251, 111, 146, 0.3);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         #noBtn {
-            background-color: #eee;
-            color: #777;
-            border: none;
-            padding: 10px 20px;
+            background: rgba(255, 255, 255, 0.8);
+            color: #888;
+            border: 1px solid rgba(0,0,0,0.05);
+            padding: 10px 25px;
             border-radius: 50px;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             cursor: pointer;
             transition: all 0.3s ease;
         }
 
-        /* Success Screen Overlay */
-        #success-overlay {
+        /* Success Screen */
+        #success {
             display: none;
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: var(--soft-white);
-            z-index: 100;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 20px;
-            animation: fadeIn 0.5s ease;
+            animation: popIn 0.5s ease forwards;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        .final-msg {
-            font-size: 1.4rem;
-            color: var(--dark-pink);
-            font-weight: bold;
+        @keyframes popIn {
+            0% { transform: scale(0.8); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
         }
     </style>
 </head>
 <body>
 
-    <div class="container" id="main-content">
-        <img src="[attachment_0](attachment)" alt="Nails" class="nail-img">
-        <h1>Hi Wilfred Jaduong'! ✨</h1>
-        <p>Your favorite <b>Professor</b> is turning 22 on February 20th! 🎂<br><br>
-        Could you please sponsor my birthday nails? It's only <b>Ksh 750</b> for the aesthetic! 💅💖</p>
+    <div class="glass-container" id="box">
+        <div id="ask">
+            <div class="nail-frame">
+                <img src="https://images.unsplash.com/photo-1604654894610-df63bc536371?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Birthday Nails">
+            </div>
+            <h1>Hi Wilfred Jaduong'! ✨</h1>
+            <p>Your favorite <b>Professor</b> is turning 22 on Feb 20th! 🎂<br><br>
+            Will you please sponsor my birthday nails?<br>It's just <b>Ksh 750</b> for the look! 💅💗</p>
 
-        <div class="btn-container">
-            <button id="yesBtn" onclick="celebrate()">Yes, of course! 🎀</button>
-            <button id="noBtn" onclick="guiltTrip()">I don't have money</button>
+            <div class="btn-stack">
+                <button id="yesBtn" onclick="finish()">Yes, of course! 🎀</button>
+                <button id="noBtn" onclick="moveNo()">I don't have money</button>
+            </div>
+        </div>
+
+        <div id="success">
+            <h1 style="font-size: 3rem;">💖🥳💅</h1>
+            <p style="font-size: 1.3rem; font-weight: bold; color: var(--main-pink);">Thank you, Wilfred Jaduong'!</p>
+            <p>Let's go and eat out when u return.<br>Be safe and come back soon.<br><b>Love you💝</b></p>
+            <p style="font-size: 0.7rem; margin-top: 30px; opacity: 0.5;">"A joyful heart is good medicine." — Prov. 17:22</p>
         </div>
     </div>
 
-    <div id="success-overlay">
-        <h1 style="font-size: 3rem;">🎉🥳💖</h1>
-        <p class="final-msg">Thank you, Wilfred Jaduong'!</p>
-        <p style="font-size: 1.2rem; margin-top: 20px;">
-            Let's go and eat out when u return, <br>
-            Be safe and come back soon. <br>
-            <b>Love you💝</b>
-        </p>
-        <p style="font-size: 0.8rem; margin-top: 40px; opacity: 0.6;">"A joyful heart is good medicine." — Prov. 17:22</p>
-    </div>
-
     <script>
-        let noCount = 0;
-        const noPhrases = [
+        let clicks = 0;
+        const phrases = [
+            "I don't have money",
             "Are you sure? 😕",
+            "A whole Jaduong'?? 🧐",
             "I thought u loved me? 😞",
-            "But it's my birthday month... 🥺",
             "Professor is gonna cry 😭",
-            "Wilfred pleaseee 🎀",
-            "Just 750 bob? 💔",
-            "Okay, I see how it is 💅"
+            "It's my 22nd birthday! 🥺",
+            "Just 750 bob? 💔"
         ];
 
-        function guiltTrip() {
-            const noBtn = document.getElementById('noBtn');
-            const yesBtn = document.getElementById('yesBtn');
+        function moveNo() {
+            const no = document.getElementById('noBtn');
+            const yes = document.getElementById('yesBtn');
             
-            // Change text
-            noBtn.innerText = noPhrases[Math.min(noCount, noPhrases.length - 1)];
+            clicks++;
+            no.innerText = phrases[Math.min(clicks, phrases.length - 1)];
             
-            // Shrink No / Grow Yes
-            noCount++;
-            let noScale = Math.max(1 - (noCount * 0.1), 0.3);
-            let yesScale = 1 + (noCount * 0.2);
+            // Shrink/Grow logic
+            let yesScale = 1 + (clicks * 0.25);
+            let noScale = Math.max(1 - (clicks * 0.12), 0.2);
             
-            noBtn.style.transform = `scale(${noScale})`;
-            yesBtn.style.transform = `scale(${yesScale})`;
+            yes.style.transform = `scale(${yesScale})`;
+            no.style.transform = `scale(${noScale})`;
 
-            // Move the "No" button slightly so it's harder to catch
-            const x = Math.random() * 20 - 10;
-            const y = Math.random() * 20 - 10;
-            noBtn.style.translate = `${x}px ${y}px`;
+            // Make it harder to click if he persists
+            if(clicks > 2) {
+                no.style.position = "absolute";
+                no.style.left = Math.random() * 80 + "%";
+                no.style.top = Math.random() * 80 + "%";
+            }
         }
 
-        function celebrate() {
-            // Confetti explosion!
+        function finish() {
+            document.getElementById('ask').style.display = 'none';
+            document.getElementById('success').style.display = 'flex';
+            
             confetti({
                 particleCount: 150,
                 spread: 70,
                 origin: { y: 0.6 },
-                colors: ['#ffb3c1', '#fb6f92', '#ffffff']
+                colors: ['#fb6f92', '#ffccd5', '#ffffff']
             });
+        }
 
-            // Show final message
-            setTimeout(() => {
-                document.getElementById('success-overlay').style.display = 'flex';
-            }, 500);
+        // Add background floating hearts
+        for(let i=0; i<15; i++) {
+            let heart = document.createElement('div');
+            heart.className = 'floating-heart';
+            heart.innerText = '💗';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = (Math.random() * 5 + 5) + 's';
+            heart.style.animationDelay = Math.random() * 5 + 's';
+            document.body.appendChild(heart);
         }
     </script>
 </body>
-  </html>
-
+</html>
