@@ -1,1 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Message for Wilfred Jaduong'</title>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <style>
+        :root {
+            --pink: #ffb3c1;
+            --dark-pink: #fb6f92;
+            --soft-white: #fff5f7;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background-color: var(--soft-white);
+            font-family: 'Bodoni Moda', serif;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 400px;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 30px;
+            border: 2px solid var(--pink);
+            box-shadow: 0 10px 30px rgba(255, 179, 193, 0.3);
+        }
+
+        .nail-img {
+            width: 100%;
+            border-radius: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            font-size: 1.5rem;
+            color: var(--dark-pink);
+            margin-bottom: 10px;
+        }
+
+        p {
+            font-size: 1rem;
+            color: #555;
+            line-height: 1.5;
+        }
+
+        .btn-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        #yesBtn {
+            background-color: var(--dark-pink);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            box-shadow: 0 5px 15px rgba(251, 111, 146, 0.4);
+        }
+
+        #noBtn {
+            background-color: #eee;
+            color: #777;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        /* Success Screen Overlay */
+        #success-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: var(--soft-white);
+            z-index: 100;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .final-msg {
+            font-size: 1.4rem;
+            color: var(--dark-pink);
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container" id="main-content">
+        <img src="[attachment_0](attachment)" alt="Nails" class="nail-img">
+        <h1>Hi Wilfred Jaduong'! ✨</h1>
+        <p>Your favorite <b>Professor</b> is turning 22 on February 20th! 🎂<br><br>
+        Could you please sponsor my birthday nails? It's only <b>Ksh 750</b> for the aesthetic! 💅💖</p>
+
+        <div class="btn-container">
+            <button id="yesBtn" onclick="celebrate()">Yes, of course! 🎀</button>
+            <button id="noBtn" onclick="guiltTrip()">I don't have money</button>
+        </div>
+    </div>
+
+    <div id="success-overlay">
+        <h1 style="font-size: 3rem;">🎉🥳💖</h1>
+        <p class="final-msg">Thank you, Wilfred Jaduong'!</p>
+        <p style="font-size: 1.2rem; margin-top: 20px;">
+            Let's go and eat out when u return, <br>
+            Be safe and come back soon. <br>
+            <b>Love you💝</b>
+        </p>
+        <p style="font-size: 0.8rem; margin-top: 40px; opacity: 0.6;">"A joyful heart is good medicine." — Prov. 17:22</p>
+    </div>
+
+    <script>
+        let noCount = 0;
+        const noPhrases = [
+            "Are you sure? 😕",
+            "I thought u loved me? 😞",
+            "But it's my birthday month... 🥺",
+            "Professor is gonna cry 😭",
+            "Wilfred pleaseee 🎀",
+            "Just 750 bob? 💔",
+            "Okay, I see how it is 💅"
+        ];
+
+        function guiltTrip() {
+            const noBtn = document.getElementById('noBtn');
+            const yesBtn = document.getElementById('yesBtn');
+            
+            // Change text
+            noBtn.innerText = noPhrases[Math.min(noCount, noPhrases.length - 1)];
+            
+            // Shrink No / Grow Yes
+            noCount++;
+            let noScale = Math.max(1 - (noCount * 0.1), 0.3);
+            let yesScale = 1 + (noCount * 0.2);
+            
+            noBtn.style.transform = `scale(${noScale})`;
+            yesBtn.style.transform = `scale(${yesScale})`;
+
+            // Move the "No" button slightly so it's harder to catch
+            const x = Math.random() * 20 - 10;
+            const y = Math.random() * 20 - 10;
+            noBtn.style.translate = `${x}px ${y}px`;
+        }
+
+        function celebrate() {
+            // Confetti explosion!
+            confetti({
+                particleCount: 150,
+                spread: 70,
+                origin: { y: 0.6 },
+                colors: ['#ffb3c1', '#fb6f92', '#ffffff']
+            });
+
+            // Show final message
+            setTimeout(() => {
+                document.getElementById('success-overlay').style.display = 'flex';
+            }, 500);
+        }
+    </script>
+</body>
+  </html>
 
